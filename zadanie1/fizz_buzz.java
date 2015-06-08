@@ -5,7 +5,7 @@ public class Zadanie1
 {
     Zadanie1()
     {
-        System.out.println("Zadanie1 - FizzBuzz");
+        System.out.println("Zadanie1-FizzBuzz");
     }
 
     class FizzBuzz
