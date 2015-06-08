@@ -1,0 +1,30 @@
+Zadanie 3
+W grze w kości bierze udział dwóch graczy o nazwach: pierwszy, drugi. Każdemu graczowi przypada 5 
+tur, w każdej turze, gracz wykonuje maksymalnie 10 rzutów dwoma kośćmi jednocześnie. Tury graczy 
+odbywają się naprzemiennie tzn. grę zaczyna gracz pierwszy, po turze następuje tura gracza 
+drugiego, następna jest tura gracza pierwszego itd. Możliwe wyniki rzutu jedna kością to jedna z 
+następujących cyfr {1, 2, 3, 4, 5, 6}. Grę zawsze rozpoczyna gracz ”pierwszy”. Podczas każdej tury 
+gracz zbiera punkty według zasad opisanych poniżej. Suma punktów każdego gracza przed 
+rozpoczęciem gry wynosi zero. Wygrywa gracz, który zbierze mniejsza ilość punktów.
+Napisz program symulujący grę w kości. Standardowe wejście programu to dwie cyfry ze zbioru {1, 2, 
+3, 4, 5, 6} oznaczające liczbę oczek na poszczególnych kościach w danym rzucie. Pary cyfr podawane 
+są kolejno. W każdym rzucie wczytywana jest nowa para cyfr oznaczająca wynik rzutu kośćmi danego 
+gracza. Standardowe wyjście zależy od sumy oczek z obydwu kości w danym rzucie w następujący 
+sposób:
+1. Gdy gracz w swojej turze w pierwszym rzucie uzyska sumę oczek z obu kości równa 7 lub 11, 
+wygrywa. Na standardowe wyjście powinien zostać wypisany komunikat o wyniku gracza w danej 
+turze: "Gracz nazwa_gracza wygrał". Aktualnie wykonywana tura powinna zostać przerwana i 
+rozpocząć tura przeciwnika.
+2. Gdy gracz w swojej turze w pierwszym rzucie uzyska sumę oczek z obu kości równa 2 lub 12, 
+przegrywa. Na standardowe wyjście powinien zostać wypisany komunikat o wyniku gracza w danej
+turze: "Gracz nazwa_gracza przegrał". Aktualnie wykonywana tura powinna zostać przerwana i 
+rozpocząć tura przeciwnika. Do punktów gracza doliczone są punkty w liczbie równej ilości rzutów w 
+danej turze.
+3. Gdy gracz w swojej turze uzyska sumę oczek z obu kości równa 5, wygrywa, kończy swoja turę, 
+rozpoczyna się tura przeciwnika. Na standardowe wyjście powinien zostać wypisany komunikat o 
+wyniku gracza w danej turze: "Gracz nazwa_gracza wygrał".
+4. Gdy gracz w swojej turze uzyska sumę oczek z obu kości inna niż opisane powyżej do punktów 
+gracza doliczona zostaje suma oczek uzyskanych w danym rzucie podzielona przez numer rzutu w 
+danej turze.
+Po zakończeniu wszystkich tur obydwu graczy na standardowe wyjście zostaje wypisany komunikat o 
+sumie punktów zdobytych przez każdego z graczy oraz który z graczy wygrał.
