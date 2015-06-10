@@ -11,11 +11,10 @@ public class Zadanie2 {
 }
 
 /**
- * @author Kamil Best
- * @since 08.06.2015
- * <p/>
- * Program sprawdza poprawnosc daty podanej przez uzytkownika.
+* Program sprawdza poprawnosc daty podanej przez uzytkownika.
  * Daty spoza przedzialu <2001-2099> sa uznawane za niepoprawne.
+ *
+ * @author Kamil Best
  */
 class Data {
     final String DATE_FORMAT = "dd-MM-yyyy";
