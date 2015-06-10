@@ -6,11 +6,10 @@ public class Zadanie1 {
 }
 
 /**
- * @author KamilBest
- * @since 08.06.2015
  * Program FizzBuzz wypisuje liczby od 1 do 100, ale dla wielokrotności trójki wyświetla "Fizz"
-zamiast liczby oraz dla wielokrotności piątki wyświetla "Buzz". Dla liczb będących wielokrotnościami
-trójki oraz piątki wyświetla "FizzBuzz".
+ * zamiast liczby oraz dla wielokrotności piątki wyświetla "Buzz". Dla liczb będących wielokrotnościami
+ * trójki oraz piątki wyświetla "FizzBuzz".
+ * @author KamilBest
  */
 class FizzBuzz {
     private void runFizzBuzz() {
