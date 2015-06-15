@@ -1,17 +1,12 @@
-public class Zadanie1 {
-    public static void main(String[] args) {
-        FizzBuzz fb = new FizzBuzz();
-        fb.run();
-    }
-}
-
 /**
- * Program FizzBuzz wypisuje liczby od 1 do 100, ale dla wielokrotności trójki wyświetla "Fizz"
- * zamiast liczby oraz dla wielokrotności piątki wyświetla "Buzz". Dla liczb będących wielokrotnościami
- * trójki oraz piątki wyświetla "FizzBuzz".
  * @author KamilBest
  */
 class FizzBuzz {
+    /**
+     * Program FizzBuzz wypisuje liczby od 1 do 100, ale dla wielokrotności trójki wyświetla "Fizz"
+     zamiast liczby oraz dla wielokrotności piątki wyświetla "Buzz". Dla liczb będących wielokrotnościami
+     trójki oraz piątki wyświetla "FizzBuzz".
+     */
     private void runFizzBuzz() {
         for (int i = 1; i <= 100; i++) {
             if ((i % 3 == 0) && (i % 5 == 0))
@@ -24,7 +19,9 @@ class FizzBuzz {
                 System.out.println(i);
         }
     }
-
+    /**
+     * Metoda uruchamiająca metode runFizzBuzz();
+     */
     public void run() {
         runFizzBuzz();
     }
