@@ -1,17 +1,5 @@
-/**
- * Created by kamilbest on 08.06.15.
- */
-
 import java.util.Scanner;
 import java.lang.Exception;
-
-public class Zadanie3 {
-
-    public static void main(String[] args) {
-        graWKosci gra = new graWKosci();
-        gra.start();
-    }
-}
 
 /**
  * W grze w kości bierze udział dwóch graczy o nazwach: pierwszy, drugi. Każdemu graczowi przypada 5
@@ -36,14 +24,16 @@ class graWKosci {
      * @param rzut - ilosc oczek wyrzuconych na jednej kostce (1-6)
      * @throws Exception - wyjatek w przypadku podania jako argument liczby spoza zakresu (1-6)
      */
-
     private void sprawdzPoprawnoscRzutu(int rzut) throws Exception {
         if (rzut < rzutMin || rzut > rzutMax)
             throw new Exception("Bledne dane, mozesz uzyc liczb z przedzialu 1-6");
     }
 
     /**
-     * Obsluga tury aktualnego gracza.
+     * Obsluga pojedynczej tury aktualnego gracza.
+     * Pobranie ilosci oczek w obu kostkach, sprawdzenie poprawnosci rzutu, jezeli zle dane, wyrzucenie wyjatki i prosba
+     * o ponowne podanie.
+     * Sumowanie punktow, informowanie o ilosci punktow oraz ewentualnej przegranej lub wygranej w turze.
      *
      * @param g - obiekt Klasy Gracz zawierajacy imie gracza
      * @return suma_pkt - zwraca ilosc uzyskanych przez gracza punktow w danej turze
@@ -98,7 +88,8 @@ class graWKosci {
 
     /**
      * Glowna metoda gry.
-     * Odpowiada za przebieg gry.
+     * Odpowiada za przebieg gry w 5 turach.
+     * Podsumowuje wyniki, informuje o wygranej, remisie lub przegranej gry.
      */
     public void start() {
         Gracz gracz1 = new Gracz("pierwszy");
@@ -126,22 +117,5 @@ class graWKosci {
             System.out.println("Remis!");
         else
             System.out.println("Gracz drugi wygral!");
-    }
-}
-
-/**
- * Klasa gracza przechowujaca imie gracza oraz ilosc punktow
- *
- * @author Kamil Best
- */
-class Gracz {
-    private String imieGracza;
-
-    Gracz(String imie) {
-        imieGracza = imie;
-    }
-
-    public String zwrocImie() {
-        return imieGracza;
     }
 }
