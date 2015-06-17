@@ -3,15 +3,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Scanner;
 
-public class Zadanie2 {
-    public static void main(String[] args) {
-        Data data = new Data();
-        data.sprawdzDate();
-    }
-}
-
 /**
-* Program sprawdza poprawnosc daty podanej przez uzytkownika.
+ * Program sprawdza poprawnosc daty podanej przez uzytkownika.
  * Daty spoza przedzialu <2001-2099> sa uznawane za niepoprawne.
  *
  * @author Kamil Best
@@ -22,8 +15,12 @@ class Data {
     private String rok;
     private int rokLiczba;
 
+    /**
+     * Metoda pobierająca date od uzytkownika (data w formacie dd-mm-rrrr )
+     * zmienna rok przechowuje 4 koncowe znaki typu char odpowiedzialne za rok, w zmiennej rokLiczba znaki zostaja zamienione na liczby
+     */
     private void pobierzDate() {
-        System.out.println("Podaj date do sprawdzenia, prawidlowy format: dd-MM-yyyy -> (dzien-miesiac-rok):");
+        System.out.println("Podaj date do sprawdzenia, prawidlowy format: dd-mm-rrrr -> (dzien-miesiac-rok):");
         System.out.println("Daty spoza okresu (2001-2099) sa niepoprawne:");
         Scanner d = new Scanner(System.in);
         data = d.nextLine();
@@ -32,12 +29,23 @@ class Data {
 
     }
 
+    /**
+     * Metoda sprawdza czy rok nalezy do przedzialu <2001,2099>
+     *
+     * @return boolean ( true jezeli nalezy, false jezeli nie nalezy)
+     */
     private boolean czyPoprawnyRok() {
         if (rokLiczba < 2001 || rokLiczba > 2099)
             return false;
         return true;
     }
 
+    /**
+     * Metoda sprawdzajaca prawidlowosc daty
+     *
+     * @return boolean (true jezeli prawidlowa, false jezeli nieprawidlowa)
+     * @throws jezeli dane nieprawidlowe
+     */
     private boolean czyPrawidlowaData() {
         try {
             if (!czyPoprawnyRok()) {
@@ -55,6 +63,9 @@ class Data {
         }
     }
 
+    /**
+     * uruchom sprawdzenie daty
+     */
     public void sprawdzDate() {
         pobierzDate();
         czyPrawidlowaData();
