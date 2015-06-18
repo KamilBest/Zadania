@@ -1,5 +1,4 @@
 import java.util.Scanner;
-
 /**
  * Klasa analizująca kody kreskowe EAN-13 lub EAN-8.
  * Wejściowy kod kreskowy: parametr tekstowy,
@@ -36,8 +35,9 @@ class KodKreskowy {
      * Metoda sprawdzajaca dlugosc podanego kodu kreskowego.
      *
      * @return boolean, true jezeli dlugosc jest poprawna, w przeciwnym wypadku false.
+     * @throws Error, wyrzucenie wyjatku w przypadkach: nieprawidlowy rodzaj lub dlugosc kodu.
      */
-    private boolean sprawdzDlugoscKodu() {
+    private boolean sprawdzDlugoscKodu()throws Error{
          /*
         Sprawdzenie, czy dlugosc kodu jest poprawna ( 8 lub 13, oraz z ewentualnym addonem - 2 lub 5cyfrowym dodatkiem)
         prawidlowe dlugosci:
@@ -45,13 +45,12 @@ class KodKreskowy {
         rodzaj kodu=2, 13, 15 lub 18
          */
         if ((rodzajKodu < 1) || (rodzajKodu > 2))
-            return false;
+            throw new Error("Nieprawidlowy rodzaj kodu! Wymagany rodzaj 1 lub 2.");
         else if ((rodzajKodu == 1) && (dlugoscKodu < 8))
-            return false;
+            throw new Error("Nieprawidlowa dlugosc kodu dla rodzaju 1 (EAN-8)!");
         else if ((rodzajKodu == 2) && (dlugoscKodu < 13))
-            return false;
-        else if ((rodzajKodu == 1)
-                && ((dlugoscKodu == 8) || (dlugoscKodu == 10) || (dlugoscKodu == 13)))
+            throw new Error("Nieprawidlowa dlugosc kodu dla rodzaju 2 (EAN-13)!");
+        else if ((rodzajKodu == 1) && ((dlugoscKodu == 8) || (dlugoscKodu == 10) || (dlugoscKodu == 13)))
             return true;
         else if ((rodzajKodu == 2)
                 && ((dlugoscKodu == 13) || (dlugoscKodu == 15) || (dlugoscKodu == 18)))
@@ -61,12 +60,15 @@ class KodKreskowy {
     }
 
     /**
-     * Metoda sprawdzajaca dane wejsciowe, sprawdzenie, czy kod sklada sie z samych cyfr,
+     * Metoda sprawdzajaca dane wejsciowe.
+     * Obsluga przypadku uciecia wiodacego zera przez skaner.
      *
      * @return boolean true jezeli dane poprawne, false jezeli nie
      */
-    private boolean sprawdzDaneWejsciowe() {
+    private boolean sprawdzDaneWejsciowe(){
         dlugoscKodu = podanyKod.length();
+        kodDoAnalizy = podanyKod.toCharArray();
+
            /*
         Sprawdzenie, czy skaner nie wycial z podanego kodu kreskowego wiodacego zera.
          */
@@ -75,21 +77,10 @@ class KodKreskowy {
         if ((dlugoscKodu == 7 && pierwszyZnak == '0') || (dlugoscKodu == 12 && pierwszyZnak == '0')) {
             podanyKod = "0" + podanyKod;
             kodDoAnalizy = podanyKod.toCharArray();
-
-        /*
-        Sprawdzenie, czy kazdy znak podanego kodu jest cyfra.
-         */
-            for (int i = 0; i < dlugoscKodu; i++) {
-                if (!Character.isDigit(kodDoAnalizy[i])) {
-                    System.out.println("Kazdy znak w kodzie musi byc cyfra.");
-                    return false;
-                }
-            }
             return true;
-        } else if (sprawdzDlugoscKodu())
+        } else if(sprawdzDlugoscKodu())
             return true;
-
-        return false;
+return false;
     }
 
     /**
@@ -98,7 +89,7 @@ class KodKreskowy {
      *
      * @return String zwraca prawidlowy kod kreskowy bez addonu
      */
-    private String analizujKod() {
+    private String analizujKod(){
         char[] poprawnyKodKreskowy = new char[13];
         String poprawnyKod = "";
         if (sprawdzDaneWejsciowe()) {
@@ -114,8 +105,6 @@ class KodKreskowy {
                     poprawnyKodKreskowy[i] = kodDoAnalizy[i];
                     poprawnyKod += poprawnyKodKreskowy[i];
                 }
-        } else {
-            System.out.println("Zly rodzaj kodu lub kod kreskowy. ");
         }
         return poprawnyKod;
     }
