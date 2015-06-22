@@ -13,20 +13,27 @@ import java.lang.Exception;
  * @author Kamil Best
  */
 class graWKosci {
-    private static final int rzutMin = 1;
-    private static final int rzutMax = 6;
-    private static final int iloscTur = 5;
+    private static final int RZUT_MIN = 1;
+    private static final int RZUT_MAX = 6;
+    private static final int ILOSC_TUR = 5;
+    private static final int MAKS_ILOSC_RZUTOW = 10;
+    private static final int PIERWSZY_RZUT = 1;
+    private static final int WYGRYWAJACA_ILOSC_7 = 7;
+    private static final int WYGRYWAJACA_ILOSC_11 = 11;
+    private static final int WYGRYWAJACA_ILOSC_5 = 5;
+    private static final int PRZEGRYWAJACA_ILOSC_2 = 2;
+    private static final int PRZEGRYWAJACA_ILOSC_12 = 12;
 
     /**
      * Sprawdzenie poprawnosci danych wejsciowych.
      * Wyrzucenie wyjatku w przypadku blednych danych.
      *
      * @param rzut - ilosc oczek wyrzuconych na jednej kostce (1-6)
-     * @throws Exception - wyjatek w przypadku podania jako argument liczby spoza zakresu (1-6)
+     * @throws IllegalArgumentException - wyjatek w przypadku podania jako argument liczby spoza zakresu (1-6)
      */
-    private void sprawdzPoprawnoscRzutu(int rzut) throws Exception {
-        if (rzut < rzutMin || rzut > rzutMax)
-            throw new Exception("Bledne dane, mozesz uzyc liczb z przedzialu 1-6");
+    private void sprawdzPoprawnoscRzutu(int rzut) throws IllegalArgumentException {
+        if (rzut < RZUT_MIN || rzut > RZUT_MAX)
+            throw new IllegalArgumentException("Bledne dane, mozesz uzyc liczb z przedzialu 1-6");
     }
 
     /**
@@ -43,7 +50,7 @@ class graWKosci {
         int pierwsza_kostka, druga_kostka;
         int suma_oczek = 0, suma_pkt = 0;
         Scanner rzut = new Scanner(System.in);
-        while (numer_rzutu <= 10) {
+        while (numer_rzutu <= MAKS_ILOSC_RZUTOW) {
             System.out.println("\nGraczu " + g.zwrocImie() + " podaj ilosc oczek w pierwszej kostce (1-6):");
             pierwsza_kostka = rzut.nextInt();
             System.out.println("\nGraczu " + g.zwrocImie() + " podaj ilosc oczek w drugiej kostce (1-6):");
@@ -68,14 +75,14 @@ class graWKosci {
             System.out.println("Gracz " + g.zwrocImie() + " wykonal " + numer_rzutu + " rzut: " + pierwsza_kostka + " " + druga_kostka);
             System.out.println("Suma oczek na obu kostkach w tym rzucie: " + suma_oczek);
 
-            if (((numer_rzutu == 1) && (suma_oczek == 7)) || (suma_oczek == 11)) {
+            if (((numer_rzutu == PIERWSZY_RZUT) && (suma_oczek == WYGRYWAJACA_ILOSC_7)) || (suma_oczek == WYGRYWAJACA_ILOSC_11)) {
                 System.out.println("Gracz " + g.zwrocImie() + "wygral ture.");
                 break;
-            } else if (((numer_rzutu == 1) && (suma_oczek == 2)) || (suma_oczek == 12)) {
+            } else if (((numer_rzutu == PIERWSZY_RZUT) && (suma_oczek == PRZEGRYWAJACA_ILOSC_2)) || (suma_oczek == PRZEGRYWAJACA_ILOSC_12)) {
                 System.out.println("Gracz " + g.zwrocImie() + " przegral ture.");
                 suma_pkt += numer_rzutu;
                 break;
-            } else if (suma_oczek == 5) {
+            } else if (suma_oczek == WYGRYWAJACA_ILOSC_5) {
                 System.out.println("Gracz " + g.zwrocImie() + " wygral ture.");
                 break;
             } else {
@@ -97,7 +104,7 @@ class graWKosci {
         String aktualny_gracz = gracz1.zwrocImie(); //zaczyna gracz pierwszy
         int suma_pkt_g1 = 0, suma_pkt_g2 = 0;
         int numer_tury = 1;
-        while (numer_tury <= iloscTur) {
+        while (numer_tury <= ILOSC_TUR) {
             System.out.println("\nTura: " + numer_tury);
             suma_pkt_g1 += tura(gracz1);
             suma_pkt_g2 += tura(gracz2);
