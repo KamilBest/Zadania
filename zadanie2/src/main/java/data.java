@@ -3,6 +3,13 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Scanner;
 
+public class Zadanie2 {
+    public static void main(String[] args) {
+        Data data = new Data();
+        data.uruchomSprawdzanie();
+    }
+}
+
 /**
  * Program sprawdza poprawnosc daty podanej przez uzytkownika.
  * Daty spoza przedzialu <2001-2099> sa uznawane za niepoprawne.
@@ -10,7 +17,7 @@ import java.util.Scanner;
  * @author Kamil Best
  */
 class Data {
-    final String DATE_FORMAT = "dd-MM-yyyy";
+    final String FORMAT_DATY = "dd-MM-yyyy";
     private String data;
     private String rok;
     private int rokLiczba;
@@ -21,53 +28,54 @@ class Data {
      */
     private void pobierzDate() {
         System.out.println("Podaj date do sprawdzenia, prawidlowy format: dd-mm-rrrr -> (dzien-miesiac-rok):");
-        System.out.println("Daty spoza okresu (2001-2099) sa niepoprawne:");
+        System.out.println("Daty spoza lat (2001-2099) sa niepoprawne:");
         Scanner d = new Scanner(System.in);
         data = d.nextLine();
-        rok = data.substring(6, 10);
-        rokLiczba = Integer.parseInt(rok);
-
     }
 
     /**
-     * Metoda sprawdza czy rok nalezy do przedzialu <2001,2099>
+     * Metoda sprawdzajaca format daty oraz czy rok w dacie nalezy do przedzialu <2001, 2099>
      *
-     * @return boolean ( true jezeli nalezy, false jezeli nie nalezy)
+     * @throws IllegalArgumentException
+     * @throws ParseException
      */
-    private boolean czyPoprawnyRok() {
-        if (rokLiczba < 2001 || rokLiczba > 2099)
-            return false;
-        return true;
-    }
-
-    /**
-     * Metoda sprawdzajaca prawidlowosc daty
-     *
-     * @return boolean (true jezeli prawidlowa, false jezeli nieprawidlowa)
-     * @throws jezeli dane nieprawidlowe
-     */
-    private boolean czyPrawidlowaData() {
+    private void sprawdzDate() {
         try {
-            if (!czyPoprawnyRok()) {
-                System.out.println(data + " jest niepoprawna!");
-                return false;
-            }
-            DateFormat formatDaty = new SimpleDateFormat(DATE_FORMAT);
+            DateFormat formatDaty = new SimpleDateFormat(FORMAT_DATY);
             formatDaty.setLenient(false);
             formatDaty.parse(data);
-            System.out.println("Data: " + data + " jest prawidlowa.");
-            return true;
         } catch (ParseException e) {
-            System.out.println("Data: " + data + " jest niepoprawna!");
-            return false;
+            throw new IllegalArgumentException("Zly format daty");
+        }
+        rok = data.substring(6, 10);
+        rokLiczba = Integer.parseInt(rok);
+        if (rokLiczba < 2001 || rokLiczba > 2099) {
+            throw new IllegalArgumentException("zly rok");
+        }
+        System.out.println("Data: " + data + " jest prawidlowa.");
+    }
+
+    /**
+     * Metoda analizujaca prawidlowosc daty, prosi o podanie daty az bedzie prawidlowa.
+     *
+     * @throws IllegalArgumentException
+     */
+    private void analizujDate() {
+        while (true) {
+            pobierzDate();
+            try {
+                sprawdzDate();
+                break;
+            } catch (IllegalArgumentException exception) {
+                System.out.println("Nieprawidlowa data, podaj jeszcze raz.");
+            }
         }
     }
 
     /**
-     * uruchom sprawdzenie daty
+     * uruchomienie sprawdzania
      */
-    public void sprawdzDate() {
-        pobierzDate();
-        czyPrawidlowaData();
+    public void uruchomSprawdzanie() {
+        analizujDate();
     }
 }
