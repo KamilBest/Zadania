@@ -15,7 +15,7 @@ class Gracz {
      *
      * @return String imieGracza
      */
-    public String zwrocImie() {
+    public String getImiegracza() {
         return imieGracza;
     }
 }
