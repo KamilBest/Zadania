@@ -9,7 +9,7 @@ import java.util.Scanner;
  *
  * @author Kamil Best
  */
-class Date {
+class DateChecker {
     final String DATE_FORMAT = "dd-MM-yyyy";
     private String date;
     private String year;
