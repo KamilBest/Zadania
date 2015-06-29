@@ -51,37 +51,37 @@ class DiceGame {
         float sumOfPointsOnDices = 0f, sumOfPlayerPoints = 0f;
         Scanner roll = new Scanner(System.in);
         while (rollNumber <= MAX_NUMBER_OF_THROWS) {
-            System.out.println("\nPlayer " + player.getPlayerName() + " enter the number of points on the first dice (1-6):");
+            System.out.println("\nPlayer " + player.getName() + " enter the number of points on the first dice (1-6):");
             firstDice = roll.nextInt();
-            System.out.println("\nPlayer " + player.getPlayerName() + " enter the number of points on the second dice (1-6):");
+            System.out.println("\nPlayer " + player.getName() + " enter the number of points on the second dice (1-6):");
             secondDice = roll.nextInt();
             try {
                 checkRollCorrectness(firstDice);
             } catch (Exception e) {
-                System.out.println("\nIncorrect roll player " + player.getPlayerName() + " enter the number of points on the first dice once more(1-6):");
+                System.out.println("\nIncorrect roll player " + player.getName() + " enter the number of points on the first dice once more(1-6):");
                 firstDice = roll.nextInt();
             }
             try {
                 checkRollCorrectness(secondDice);
 
             } catch (Exception e) {
-                System.out.println("\nIncorrect roll player " + player.getPlayerName() + " enter the number of points on the second dice once more(1-6):");
+                System.out.println("\nIncorrect roll player " + player.getName() + " enter the number of points on the second dice once more(1-6):");
                 secondDice = roll.nextInt();
             }
 
             sumOfPointsOnDices = firstDice + secondDice;
-            System.out.println("Player " + player.getPlayerName() + " made " + rollNumber + " roll: " + firstDice + " " + secondDice);
+            System.out.println("Player " + player.getName() + " made " + rollNumber + " roll: " + firstDice + " " + secondDice);
             System.out.println("Sum of the player's points in this roll: " + sumOfPointsOnDices);
 
             if (((rollNumber == FIRST_THROW) && (sumOfPointsOnDices == WINNING_ROLLS_SUM_7)) || (sumOfPointsOnDices == WINNING_ROLLS_SUM_11)) {
-                System.out.println("Player " + player.getPlayerName() + "won the round.");
+                System.out.println("Player " + player.getName() + "won the round.");
                 break;
             } else if (((rollNumber == FIRST_THROW) && (sumOfPointsOnDices == LOOSING_ROLLS_SUM_2)) || (sumOfPointsOnDices == LOOSING_ROLLS_SUM_12)) {
-                System.out.println("Player " + player.getPlayerName() + " lost the round.");
+                System.out.println("Player " + player.getName() + " lost the round.");
                 sumOfPlayerPoints += rollNumber;
                 break;
             } else if (sumOfPointsOnDices == WINNING_ROLLS_SUM_5) {
-                System.out.println("Player " + player.getPlayerName() + " won the round.");
+                System.out.println("Player " + player.getName() + " won the round.");
                 break;
             } else {
                 sumOfPlayerPoints += sumOfPointsOnDices / rollNumber;
@@ -98,7 +98,7 @@ class DiceGame {
     public void startGame() {
         Player player1 = new Player("First");
         Player player2 = new Player("Second");
-        String currentPlayer = player1.getPlayerName(); //Player "First" starting.
+        String currentPlayer = player1.getName(); //Player "First" starting.
         float sumOfPlayer1Points = 0f, sumOfPlayer2Points = 0f;
         int numberOfRounds = 1;
         while (numberOfRounds <= NUMBER_OF_TURNS) {
@@ -106,8 +106,8 @@ class DiceGame {
             sumOfPlayer1Points += round(player1);
             sumOfPlayer2Points += round(player2);
             System.out.println("\nSummary - results: ");
-            System.out.println("Player " + player1.getPlayerName() + " has : " + sumOfPlayer1Points + "points.");
-            System.out.println("Player " + player2.getPlayerName() + " has : " + sumOfPlayer2Points + "points.");
+            System.out.println("Player " + player1.getName() + " has : " + sumOfPlayer1Points + "points.");
+            System.out.println("Player " + player2.getName() + " has : " + sumOfPlayer2Points + "points.");
             numberOfRounds++;
         }
         System.out.println("\nEnd results: ");
