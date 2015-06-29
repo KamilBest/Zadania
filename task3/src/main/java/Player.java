@@ -4,18 +4,18 @@
  * @author Kamil Best
  */
 class Player {
-    private String playerName;
+    private String name;
 
     Player(String name) {
-        playerName = name;
+        this.name = name;
     }
 
     /**
      * The method returns player name.
      *
-     * @return String playerName
+     * @return String name
      */
-    public String getPlayerName() {
-        return playerName;
+    public String getName() {
+        return name;
     }
 }

@@ -5,8 +5,7 @@
 public class Main {
 
     public static void main(String[] args) {
-        DiceGame gra = new DiceGame();
-        gra.startGame();
+        DiceGame game = new DiceGame();
+        game.startGame();
     }
 }
-
