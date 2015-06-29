@@ -1,18 +1,18 @@
-##Zadanie 1
+###Zadanie 1
 
 Napisz program, który wypisuje liczby od 1 do 100. Ale dla wielokrotności trójki wyświetl "Fizz" 
 zamiast liczby oraz dla wielokrotności piątki wyświetl "Buzz". Dla liczb będących wielokrotnościami 
 trójki oraz piątki wyświetl "FizzBuzz".
 
 
-##Zadanie 2
+###Zadanie 2
 
 Napisz funkcję sprawdzającą poprawność daty w latach 2001-2099 (daty spoza tego okresu uznaj za 
 niepoprawne).
 Wejście – trzy parametry liczbowe (dzień, miesiąc, rok).
 Wyjście – parametr logiczny (true – data poprawna, false – data niepoprawna)
 
-##Zadanie 3
+###Zadanie 3
 
 W grze w kości bierze udział dwóch graczy o nazwach: pierwszy, drugi. Każdemu graczowi przypada 5 
 tur, w każdej turze, gracz wykonuje maksymalnie 10 rzutów dwoma kośćmi jednocześnie. Tury graczy 
@@ -44,7 +44,7 @@ danej turze.
 Po zakończeniu wszystkich tur obydwu graczy na standardowe wyjście zostaje wypisany komunikat o 
 sumie punktów zdobytych przez każdego z graczy oraz który z graczy wygrał.
 
-##Zadanie 4
+###Zadanie 4
 
 Celem zadania jest napisanie klasy analizującej kody kreskowe EAN-13 lub EAN-8.
 Poza samą klasą proszę o przygotowanie testów jednostkowych sprawdzających jej poprawność.
