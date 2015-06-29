@@ -2,10 +2,11 @@
  * @author KamilBest
  */
 class FizzBuzz {
+
     /**
-     * Program FizzBuzz wypisuje liczby od 1 do 100, ale dla wielokrotności trójki wyświetla "Fizz"
-     zamiast liczby oraz dla wielokrotności piątki wyświetla "Buzz". Dla liczb będących wielokrotnościami
-     trójki oraz piątki wyświetla "FizzBuzz".
+     * FizzBuzz program prints the numbers from 1 to 100, but for multiples of three displays "Fizz"
+     * and for multiples of five displays "Buzz" instead of the number.
+     * For numbers that are multiples of three and five shows "FizzBuzz".
      */
     private void runFizzBuzz() {
         for (int i = 1; i <= 100; i++) {
@@ -19,8 +20,9 @@ class FizzBuzz {
                 System.out.println(i);
         }
     }
+
     /**
-     * Metoda uruchamiająca metode runFizzBuzz();
+     * Method runs runFizzBuzz();
      */
     public void run() {
         runFizzBuzz();
