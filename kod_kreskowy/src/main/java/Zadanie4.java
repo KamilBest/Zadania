@@ -5,7 +5,7 @@
 public class Zadanie4 {
 
     public static void main(String[] args) {
-        KodKreskowy kod=new KodKreskowy();
-        kod.uruchom();
+        Barcode kod=new Barcode();
+        kod.run();
     }
 }
