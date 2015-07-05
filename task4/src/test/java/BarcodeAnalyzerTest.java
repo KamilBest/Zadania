@@ -2,7 +2,10 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Method;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class BarcodeAnalyzerTest {
     private BarcodeAnalyzer barcodeAnalyzer;
@@ -24,15 +27,24 @@ public class BarcodeAnalyzerTest {
         barcodeChecker=new BarcodeChecker();
     }
 
+    /**
+     * Checking whether adding leading zero is working.
+     */
     @Test
     public void checkAddingLeadingZero()
     {
         assertEquals("0123456",barcodeAnalyzer.addLeadingZero("123456"));
         assertEquals("0333",barcodeAnalyzer.addLeadingZero("333"));
         assertEquals("00000",barcodeAnalyzer.addLeadingZero("0000"));
-        assertEquals("0142353",barcodeAnalyzer.addLeadingZero("142353"));
+        assertEquals("0142353", barcodeAnalyzer.addLeadingZero("142353"));
+
+        assertNotEquals("0142353", barcodeAnalyzer.addLeadingZero("42353"));
+        assertNotEquals("142353", barcodeAnalyzer.addLeadingZero("142353"));
     }
 
+    /**
+     * Checking whether method returning correct barcode - without addons and with adding leading zero if it had been cutt of.
+     */
     @Test
     public void checkReturningCorrectBarcode() {
         assertEquals("12345678", barcodeAnalyzer.returnCorrectBarcode(barcodeChecker,"12345678", 1));

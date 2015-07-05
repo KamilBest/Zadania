@@ -12,7 +12,7 @@ class BarcodeChecker {
      * @return String
      * @throws IllegalArgumentException
      */
-    public String checkBarcodeLength(String givenBarcode, int givenBarcodeType) {
+    public int checkBarcodeLength(String givenBarcode, int givenBarcodeType) {
         barcodeLength = givenBarcode.length();
 
          /*
@@ -33,7 +33,7 @@ class BarcodeChecker {
                 && ((barcodeLength != 13) && (barcodeLength != 15) && (barcodeLength != 18)))
             throw new IllegalArgumentException("Incorrect barrcode length for type 2(EAN-13)!");
         else
-            return givenBarcode;
+            return barcodeLength;
     }
 
     /**

@@ -52,8 +52,8 @@ class BarcodeAnalyzer {
             givenBarcode = addLeadingZero(givenBarcode);
         else
             barcodeToAnalyze = givenBarcode.toCharArray();
-        barcodeCheckerObj.checkBarcodeLength(givenBarcode, givenBarcodeType);
-        char[] entireBarcode = new char[13];
+        int barcodeLength=barcodeCheckerObj.checkBarcodeLength(givenBarcode, givenBarcodeType);
+        char[] entireBarcode = new char[barcodeLength];
         String correctBarcode = "";
         System.out.println("Barcode type and barcode are correct.");
         System.out.println("Correct barcode without addon:");
