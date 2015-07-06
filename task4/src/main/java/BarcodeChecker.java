@@ -9,10 +9,10 @@ class BarcodeChecker {
      * The method checking correctness of barcode length
      *
      * @param String givenBarcode, int givenBarcodeType
-     * @return String
+     * @return boolean, true if lenghts are ok
      * @throws IllegalArgumentException
      */
-    public int checkBarcodeLength(String givenBarcode, int givenBarcodeType) {
+    public boolean checkBarcodeLength(String givenBarcode, int givenBarcodeType) {
         barcodeLength = givenBarcode.length();
 
          /*
@@ -33,21 +33,27 @@ class BarcodeChecker {
                 && ((barcodeLength != 13) && (barcodeLength != 15) && (barcodeLength != 18)))
             throw new IllegalArgumentException("Incorrect barrcode length for type 2(EAN-13)!");
         else
-            return barcodeLength;
+            return true;
     }
 
     /**
      * The method checking leading zero truncation.
+     * Possible lengths when zero could be cut off: 7,9,12,14,17
      *
-     * @param String
+     * @param String givenBarcode
      * @return boolean
      */
     public boolean checkZeroTruncation(String givenBarcode) {
+        final int CHECKED_LENGTHS = 5;
         barcodeLength = givenBarcode.length();
         char firstCharacter = givenBarcode.charAt(0);
-
-        if ((barcodeLength == 7 && firstCharacter == '0') || (barcodeLength == 12 && firstCharacter == '0')) {
-            return true;
+        int[] truncationLengths = {7, 9, 12, 14, 17};
+        for (int i = 0; i < CHECKED_LENGTHS; i++) {
+            if (firstCharacter == '0') {
+                if (barcodeLength == truncationLengths[i]) {
+                    return true;
+                }
+            }
         }
         return false;
     }

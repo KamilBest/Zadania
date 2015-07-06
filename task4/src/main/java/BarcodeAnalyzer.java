@@ -13,20 +13,50 @@
  * @author KamilBest
  */
 class BarcodeAnalyzer {
-    protected BarcodeScannerInput input;
+    protected BarcodeInputInterface input;
     protected String barcode;
     protected int barcodeType;
     private char[] barcodeToAnalyze;
+    private BarcodeChecker checker;
 
     /**
-     * Constructor for taking input from user
+     * Constructor
      *
-     * @param BarcodeScannerInput input
+     * @param BarcodeScannerInput input, BarcodeChecker checker
      */
-    public BarcodeAnalyzer(BarcodeScannerInput input){
-        this.input=input;
-        this.barcode=input.getBarcode();
-        this.barcodeType=input.getBarcodeType();
+    public BarcodeAnalyzer(BarcodeInputInterface input, BarcodeChecker checker) {
+        this.checker = checker;
+        this.input = input;
+    }
+
+    /**
+     * Main method of the class. Combines all classes together.
+     * 1. Taking input from user.
+     * 2. Checking whether leading zero had been cut off, if yes, adding leading zero to barcode
+     * and then checking correctness of barcode and type length.
+     * If hadn't been cut of checking lengths withoud adding zero.
+     * 3.Showing correct barcode.
+     * 4.Returning tre or false.
+     *
+     * @return boolean
+     */
+    public boolean analyzeBarcode() {
+        barcode = this.input.getBarcode();
+        barcodeType = this.input.getBarcodeType();
+        if (true == this.checker.checkZeroTruncation(barcode)) {
+            barcode = addLeadingZero(barcode);
+            if (true == this.checker.checkBarcodeLength(barcode, barcodeType)) {
+                System.out.println(returnCorrectBarcode(barcode, barcodeType));
+                return true;
+            }
+        } else {
+            if (true == this.checker.checkBarcodeLength(barcode, barcodeType)) {
+                System.out.println(returnCorrectBarcode(barcode, barcodeType));
+                return true;
+            }
+        }
+        System.out.println("Incorrect barcode or type.");
+        return false;
     }
 
     /**
@@ -35,7 +65,7 @@ class BarcodeAnalyzer {
      * @param String givenBarcode
      * @return String
      */
-    public String addLeadingZero(String givenBarcode) {
+    private String addLeadingZero(String givenBarcode) {
         givenBarcode = "0" + givenBarcode;
         barcodeToAnalyze = givenBarcode.toCharArray();
         return givenBarcode;
@@ -44,16 +74,13 @@ class BarcodeAnalyzer {
     /**
      * The method returns correct barcode - without addons.
      *
-     * @param BarcodeChecker barcodeCheckerObj, String givenBarcode, int givenBarcodeType
-     * @return char[] - correct barcode
+     * @param String givenBarcode, int givenBarcodeType
+     * @return String - correct barcode
      */
-    public String returnCorrectBarcode(BarcodeChecker barcodeCheckerObj,String givenBarcode, int givenBarcodeType) {
-        if (barcodeCheckerObj.checkZeroTruncation(givenBarcode) == true)
-            givenBarcode = addLeadingZero(givenBarcode);
-        else
-            barcodeToAnalyze = givenBarcode.toCharArray();
-        int barcodeLength=barcodeCheckerObj.checkBarcodeLength(givenBarcode, givenBarcodeType);
-        char[] entireBarcode = new char[barcodeLength];
+    public String returnCorrectBarcode(String givenBarcode, int givenBarcodeType) {
+        barcodeToAnalyze = givenBarcode.toCharArray();
+        int givenBarcodeLength = givenBarcode.length();
+        char[] entireBarcode = new char[givenBarcodeLength];
         String correctBarcode = "";
         System.out.println("Barcode type and barcode are correct.");
         System.out.println("Correct barcode without addon:");
@@ -67,15 +94,6 @@ class BarcodeAnalyzer {
                 entireBarcode[i] = barcodeToAnalyze[i];
                 correctBarcode += entireBarcode[i];
             }
-
         return correctBarcode;
-    }
-
-    /**
-     * The methods runs checking barcode.
-     */
-    public void run() {
-        BarcodeChecker checker=new BarcodeChecker();
-        System.out.println(returnCorrectBarcode(checker,barcode, barcodeType));
     }
 }
