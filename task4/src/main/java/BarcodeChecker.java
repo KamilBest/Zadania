@@ -12,7 +12,7 @@ class BarcodeChecker {
      * @return boolean, true if lenghts are ok
      * @throws IllegalArgumentException
      */
-    public boolean checkBarcodeLength(String givenBarcode, int givenBarcodeType) {
+    public boolean checkBarcodeLength(String givenBarcode, int givenBarcodeType) throws IllegalArgumentException/**/{
         barcodeLength = givenBarcode.length();
 
          /*
@@ -43,17 +43,15 @@ class BarcodeChecker {
      * @param String givenBarcode
      * @return boolean
      */
-    public boolean checkZeroTruncation(String givenBarcode) {
+    public boolean checkZeroTruncation(String givenBarcode)throws CodeMissingLeadingZeroException{
         final int CHECKED_LENGTHS = 5;
         barcodeLength = givenBarcode.length();
         char firstCharacter = givenBarcode.charAt(0);
         int[] truncationLengths = {7, 9, 12, 14, 17};
         for (int i = 0; i < CHECKED_LENGTHS; i++) {
-            if (firstCharacter == '0') {
-                if (barcodeLength == truncationLengths[i]) {
-                    return true;
+            if ((firstCharacter == '0')&&(barcodeLength == truncationLengths[i])) {
+                    throw new CodeMissingLeadingZeroException("Scanner cut off leading zero in barcode.");
                 }
-            }
         }
         return false;
     }

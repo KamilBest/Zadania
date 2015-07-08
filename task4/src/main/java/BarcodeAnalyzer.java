@@ -43,32 +43,18 @@ class BarcodeAnalyzer {
     public boolean analyzeBarcode() {
         barcode = this.input.getBarcode();
         barcodeType = this.input.getBarcodeType();
-        if (true == this.checker.checkZeroTruncation(barcode)) {
-            barcode = addLeadingZero(barcode);
-            if (true == this.checker.checkBarcodeLength(barcode, barcodeType)) {
-                System.out.println(returnCorrectBarcode(barcode, barcodeType));
-                return true;
-            }
-        } else {
-            if (true == this.checker.checkBarcodeLength(barcode, barcodeType)) {
-                System.out.println(returnCorrectBarcode(barcode, barcodeType));
-                return true;
-            }
+        try {
+            this.checker.checkZeroTruncation(barcode);
+        } catch (CodeMissingLeadingZeroException e) {
+            barcode = '0' + barcode;
         }
-        System.out.println("Incorrect barcode or type.");
+        try {
+            if(this.checker.checkBarcodeLength(barcode, barcodeType))
+                return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
         return false;
-    }
-
-    /**
-     * The method adds leading 0 if it had been cut off.
-     *
-     * @param String givenBarcode
-     * @return String
-     */
-    private String addLeadingZero(String givenBarcode) {
-        givenBarcode = "0" + givenBarcode;
-        barcodeToAnalyze = givenBarcode.toCharArray();
-        return givenBarcode;
     }
 
     /**
@@ -77,19 +63,17 @@ class BarcodeAnalyzer {
      * @param String givenBarcode, int givenBarcodeType
      * @return String - correct barcode
      */
-    public String returnCorrectBarcode(String givenBarcode, int givenBarcodeType) {
-        barcodeToAnalyze = givenBarcode.toCharArray();
-        int givenBarcodeLength = givenBarcode.length();
+    public String returnCorrectBarcode() {
+        barcodeToAnalyze = barcode.toCharArray();
+        int givenBarcodeLength = barcode.length();
         char[] entireBarcode = new char[givenBarcodeLength];
         String correctBarcode = "";
-        System.out.println("Barcode type and barcode are correct.");
-        System.out.println("Correct barcode without addon:");
-        if (givenBarcodeType == 1)
+        if (barcodeType == 1)
             for (int i = 0; i < 8; i++) {
                 entireBarcode[i] = barcodeToAnalyze[i];
                 correctBarcode += entireBarcode[i];
             }
-        else if (givenBarcodeType == 2)
+        else if (barcodeType == 2)
             for (int i = 0; i < 13; i++) {
                 entireBarcode[i] = barcodeToAnalyze[i];
                 correctBarcode += entireBarcode[i];
