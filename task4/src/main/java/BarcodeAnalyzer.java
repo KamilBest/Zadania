@@ -52,7 +52,7 @@ class BarcodeAnalyzer {
             if(this.checker.checkBarcodeLength(barcode, barcodeType))
                 return true;
         } catch (IllegalArgumentException e) {
-            return false;
+            e.printStackTrace();
         }
         return false;
     }
