@@ -42,6 +42,13 @@ class BarcodeAnalyzer {
     public boolean analyzeBarcode(BarcodeInputInterface input) {
         barcode = this.input.getBarcode();
         barcodeType = this.input.getBarcodeType();
+        try{
+            this.checker.isNumeric(barcode);
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+            return false;
+        }
+
         try {
             this.checker.checkZeroTruncation(barcode);
         } catch (CodeMissingLeadingZeroException e) {

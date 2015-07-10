@@ -1,5 +1,6 @@
 /**
- * Class checking correctness (correct length) of given barcode and type.
+ * Class checking correctness (correct length) of given barcode and type
+ * or whether all characters in barcode are digits.
  * Checking whether leading zero in barcode had been cut off or not.
  */
 class BarcodeChecker {
@@ -13,6 +14,21 @@ class BarcodeChecker {
     private final int EAN13_ADDON5_LENGTH = 18;
     private int barcodeLength;
 
+    /**
+     * Checking whether barcode is numeric
+     * @param barcode
+     * @return
+     * @throws NumberFormatException
+     */
+    public boolean isNumeric(String barcode)throws NumberFormatException
+    {
+        for (int i = 0; i < barcode.length(); i++) {
+            if (!Character.isDigit(barcode.charAt(i))) {
+                throw new NumberFormatException("Barcode have to be numeric!");
+            }
+        }
+        return true;
+    }
     /**
      * The method checking correctness of barcode length
      *

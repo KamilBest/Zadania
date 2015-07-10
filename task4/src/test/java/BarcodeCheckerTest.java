@@ -11,6 +11,30 @@ public class BarcodeCheckerTest {
         barcodeChecker = new BarcodeChecker();
     }
 
+    @Test
+    public void checkIsNumericMethod() {
+        assertTrue(barcodeChecker.isNumeric("65833254"));
+        assertTrue(barcodeChecker.isNumeric("3738507483"));
+
+        assertTrue(barcodeChecker.isNumeric("5048706683695"));
+
+        boolean thrown = false;
+        try {
+            barcodeChecker.isNumeric("asffbfddsf");
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+
+        thrown = false;
+        try {
+            barcodeChecker.isNumeric("asvasb");
+        } catch (IllegalArgumentException e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
+    }
+
     /**
      * Checking whether given barcode has correct length for each type.
      * type 1 - EAN-8, length: 8, 10, 13
