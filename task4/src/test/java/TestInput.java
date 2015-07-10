@@ -1,34 +1,30 @@
-/**
- * Created by kamilbest on 04.07.15.
- */
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestInput {
-    private TakeInputTest inputTest;
+    private TestBarcodeInput inputTest;
 
     /**
-     * checking input data correctness
+     * checking scannerInput data correctness
      */
     @Test
     public void checkInput() {
-        inputTest = new TakeInputTest("12345678", 1);
-        assertEquals("12345678", inputTest.getBarcode());
+        inputTest = new TestBarcodeInput("96385074", BarcodeChecker.EAN8_TYPE);
+        assertEquals("96385074", inputTest.getBarcode());
         assertEquals(1, inputTest.getBarcodeType());
 
-        inputTest = new TakeInputTest("1234567890987", 2);
-        assertEquals("1234567890987", inputTest.getBarcode());
+        inputTest = new TestBarcodeInput("5904277189152", BarcodeChecker.EAN13_TYPE);
+        assertEquals("5904277189152", inputTest.getBarcode());
         assertEquals(2, inputTest.getBarcodeType());
 
-        inputTest = new TakeInputTest("111", 1);
-        assertEquals("111", inputTest.getBarcode());
+        inputTest = new TestBarcodeInput("590427718915210", BarcodeChecker.EAN8_TYPE);
+        assertEquals("590427718915210", inputTest.getBarcode());
         assertEquals(1, inputTest.getBarcodeType());
 
-        inputTest = new TakeInputTest("000111000", 1);
-        assertEquals("000111000", inputTest.getBarcode());
+        inputTest = new TestBarcodeInput("9638507412", BarcodeChecker.EAN8_TYPE);
+        assertEquals("9638507412", inputTest.getBarcode());
         assertEquals(1, inputTest.getBarcodeType());
-
     }
 }
+

@@ -1,7 +1,7 @@
 /**
- * Created by kamilbest on 08.07.15.
+ * Exception which is thrown when leading zero in barcode had been cut off.
  */
-public class CodeMissingLeadingZeroException extends Exception{
+public class CodeMissingLeadingZeroException extends Exception {
     public CodeMissingLeadingZeroException(String message) {
         super(message);
     }

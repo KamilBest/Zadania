@@ -4,12 +4,10 @@ public class Main {
         System.out.println("Barcode analyzer.");
         BarcodeAnalyzer barcode;
         barcode = new BarcodeAnalyzer(new UserBarcodeInput(), new BarcodeChecker());
-        if(barcode.analyzeBarcode()) {
-            System.out.print(barcode.returnCorrectBarcode());
+        if (barcode.analyzeBarcode(new UserBarcodeInput())) {
+            System.out.print(barcode.returnCorrectBarcode(barcode.barcode, barcode.barcodeType));
             System.out.print(" - correct barcode without addon.");
-        }
-        else
-        {
+        } else {
             System.out.println("Wrong barcode or type.");
         }
     }
